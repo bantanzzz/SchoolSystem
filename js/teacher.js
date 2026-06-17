@@ -10,24 +10,34 @@ import {
 
 const TEACHERS_COLLECTION = "teachers";
 
-// Get DOM elements
-const modal = document.getElementById("teacherModal");
-const teacherForm = document.getElementById("teacherForm");
-const teachersTableBody = document.getElementById("teachersTableBody");
-const newTeacherBtn = document.querySelector('[data-action="new-teacher"]');
-const closeModalBtns = document.querySelectorAll('[data-action="close-modal"]');
-const searchInput = document.querySelector('input[placeholder*="Search teachers"]');
-const departmentFilter = document.querySelector('select:nth-of-type(1)');
-const statusFilter = document.querySelector('select:nth-of-type(2)');
-const submitBtn = document.getElementById("submitBtn");
-const modalTitle = document.getElementById("modalTitle");
-
 let allTeachers = [];
 let currentEditingId = null;
 let teacherCounter = 1;
 
+// DOM elements - declare globally
+let modal, teacherForm, teachersTableBody, newTeacherBtn, closeModalBtns;
+let searchInput, departmentFilter, statusFilter, submitBtn, modalTitle;
+
 // Initialize the application
 document.addEventListener("DOMContentLoaded", async () => {
+  // Get DOM elements after page loads
+  modal = document.getElementById("teacherModal");
+  teacherForm = document.getElementById("teacherForm");
+  teachersTableBody = document.getElementById("teachersTableBody");
+  newTeacherBtn = document.querySelector('[data-action="new-teacher"]');
+  closeModalBtns = document.querySelectorAll('[data-action="close-modal"]');
+  searchInput = document.querySelector('input[placeholder*="Search teachers"]');
+  departmentFilter = document.querySelectorAll("select")[0];
+  statusFilter = document.querySelectorAll("select")[1];
+  submitBtn = document.getElementById("submitBtn");
+  modalTitle = document.getElementById("modalTitle");
+
+  // Verify all elements exist
+  if (!modal || !teacherForm || !teachersTableBody) {
+    console.error("Required DOM elements not found");
+    return;
+  }
+
   setupEventListeners();
   await loadTeachers();
   generateTeacherID();
@@ -35,36 +45,60 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 // Setup all event listeners
 function setupEventListeners() {
-  newTeacherBtn.addEventListener("click", openAddModal);
-  closeModalBtns.forEach((btn) => btn.addEventListener("click", closeModal));
-  teacherForm.addEventListener("submit", handleFormSubmit);
-  searchInput.addEventListener("input", filterTeachers);
-  departmentFilter.addEventListener("change", filterTeachers);
-  statusFilter.addEventListener("change", filterTeachers);
+  if (newTeacherBtn) {
+    newTeacherBtn.addEventListener("click", openAddModal);
+  }
+
+  closeModalBtns.forEach((btn) => {
+    btn.addEventListener("click", closeModal);
+  });
+
+  if (teacherForm) {
+    teacherForm.addEventListener("submit", handleFormSubmit);
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener("input", filterTeachers);
+  }
+
+  if (departmentFilter) {
+    departmentFilter.addEventListener("change", filterTeachers);
+  }
+
+  if (statusFilter) {
+    statusFilter.addEventListener("change", filterTeachers);
+  }
 
   // Close modal when clicking outside
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) closeModal();
-  });
+  if (modal) {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+  }
 }
 
 // Load teachers from Firebase
 async function loadTeachers() {
   try {
     const db = window.firebaseDb;
+    if (!db) {
+      console.error("Firebase DB not initialized");
+      return;
+    }
+
     const querySnapshot = await getDocs(collection(db, TEACHERS_COLLECTION));
     allTeachers = [];
-    querySnapshot.forEach((doc) => {
+    querySnapshot.forEach((docSnapshot) => {
       allTeachers.push({
-        id: doc.id,
-        ...doc.data(),
+        id: docSnapshot.id,
+        ...docSnapshot.data(),
       });
     });
     displayTeachers(allTeachers);
     updateTeacherCounter();
   } catch (error) {
     console.error("Error loading teachers:", error);
-    showNotification("Error loading teachers", "error");
+    showNotification("Error loading teachers: " + error.message, "error");
   }
 }
 
@@ -89,22 +123,25 @@ function generateTeacherID() {
 // Open add teacher modal
 function openAddModal() {
   currentEditingId = null;
-  teacherForm.reset();
-  modalTitle.textContent = "Add New Teacher";
-  submitBtn.textContent = "Add Teacher";
-  document.getElementById("teacherName").focus();
-  modal.classList.remove("hidden");
+  if (teacherForm) teacherForm.reset();
+  if (modalTitle) modalTitle.textContent = "Add New Teacher";
+  if (submitBtn) submitBtn.textContent = "Add Teacher";
+  const nameInput = document.getElementById("teacherName");
+  if (nameInput) nameInput.focus();
+  if (modal) modal.classList.remove("hidden");
 }
 
 // Close modal
 function closeModal() {
-  modal.classList.add("hidden");
-  teacherForm.reset();
+  if (modal) modal.classList.add("hidden");
+  if (teacherForm) teacherForm.reset();
   currentEditingId = null;
 }
 
 // Display teachers in table
 function displayTeachers(teachers) {
+  if (!teachersTableBody) return;
+
   teachersTableBody.innerHTML = "";
 
   if (teachers.length === 0) {
@@ -149,32 +186,59 @@ function displayTeachers(teachers) {
 // Edit teacher
 function editTeacher(teacher) {
   currentEditingId = teacher.id;
-  document.getElementById("teacherName").value = teacher.name;
-  document.getElementById("teacherEmail").value = teacher.email;
-  document.getElementById("teacherDepartment").value = teacher.department;
-  document.getElementById("teacherPhone").value = teacher.phone || "";
-  document.getElementById("teacherStatus").value = teacher.status;
+  const nameInput = document.getElementById("teacherName");
+  const emailInput = document.getElementById("teacherEmail");
+  const deptInput = document.getElementById("teacherDepartment");
+  const phoneInput = document.getElementById("teacherPhone");
+  const statusInput = document.getElementById("teacherStatus");
 
-  modalTitle.textContent = "Edit Teacher";
-  submitBtn.textContent = "Update Teacher";
-  modal.classList.remove("hidden");
-  document.getElementById("teacherName").focus();
+  if (nameInput) nameInput.value = teacher.name;
+  if (emailInput) emailInput.value = teacher.email;
+  if (deptInput) deptInput.value = teacher.department;
+  if (phoneInput) phoneInput.value = teacher.phone || "";
+  if (statusInput) statusInput.value = teacher.status;
+
+  if (modalTitle) modalTitle.textContent = "Edit Teacher";
+  if (submitBtn) submitBtn.textContent = "Update Teacher";
+  if (modal) modal.classList.remove("hidden");
+  if (nameInput) nameInput.focus();
 }
 
 // Handle form submission
 async function handleFormSubmit(e) {
   e.preventDefault();
 
+  const nameInput = document.getElementById("teacherName");
+  const emailInput = document.getElementById("teacherEmail");
+  const deptInput = document.getElementById("teacherDepartment");
+  const phoneInput = document.getElementById("teacherPhone");
+  const statusInput = document.getElementById("teacherStatus");
+
+  if (!nameInput || !emailInput || !deptInput || !statusInput) {
+    showNotification("Form fields not found", "error");
+    return;
+  }
+
   const teacherData = {
-    name: document.getElementById("teacherName").value,
-    email: document.getElementById("teacherEmail").value,
-    department: document.getElementById("teacherDepartment").value,
-    phone: document.getElementById("teacherPhone").value,
-    status: document.getElementById("teacherStatus").value,
+    name: nameInput.value.trim(),
+    email: emailInput.value.trim(),
+    department: deptInput.value,
+    phone: phoneInput ? phoneInput.value.trim() : "",
+    status: statusInput.value,
   };
+
+  // Validation
+  if (!teacherData.name || !teacherData.email || !teacherData.department) {
+    showNotification("Please fill in all required fields", "error");
+    return;
+  }
 
   try {
     const db = window.firebaseDb;
+    if (!db) {
+      showNotification("Firebase not initialized", "error");
+      return;
+    }
 
     if (currentEditingId) {
       // Update existing teacher
@@ -210,6 +274,11 @@ async function deleteTeacher(teacherId) {
 
   try {
     const db = window.firebaseDb;
+    if (!db) {
+      showNotification("Firebase not initialized", "error");
+      return;
+    }
+
     await deleteDoc(doc(db, TEACHERS_COLLECTION, teacherId));
     showNotification("Teacher deleted successfully", "success");
     await loadTeachers();
@@ -221,9 +290,9 @@ async function deleteTeacher(teacherId) {
 
 // Filter teachers
 function filterTeachers() {
-  const searchTerm = searchInput.value.toLowerCase();
-  const departmentFilter = document.querySelector('select:nth-of-type(1)').value;
-  const statusFilter = document.querySelector('select:nth-of-type(2)').value;
+  const searchTerm = searchInput ? searchInput.value.toLowerCase() : "";
+  const deptValue = departmentFilter ? departmentFilter.value : "";
+  const statusValue = statusFilter ? statusFilter.value : "";
 
   const filtered = allTeachers.filter((teacher) => {
     const matchesSearch =
@@ -232,14 +301,14 @@ function filterTeachers() {
       (teacher.teacherId && teacher.teacherId.toLowerCase().includes(searchTerm));
 
     const matchesDepartment =
-      departmentFilter === "Filter by Department" ||
-      departmentFilter === "" ||
-      teacher.department === departmentFilter;
+      deptValue === "Filter by Department" ||
+      deptValue === "" ||
+      teacher.department === deptValue;
 
     const matchesStatus =
-      statusFilter === "Filter by Status" ||
-      statusFilter === "" ||
-      teacher.status === statusFilter;
+      statusValue === "Filter by Status" ||
+      statusValue === "" ||
+      teacher.status === statusValue;
 
     return matchesSearch && matchesDepartment && matchesStatus;
   });
@@ -249,14 +318,13 @@ function filterTeachers() {
 
 // Show notification
 function showNotification(message, type = "info") {
-  // Create a simple notification (you can enhance this)
   const notification = document.createElement("div");
   notification.className = `fixed top-4 right-4 px-4 py-3 rounded-lg text-white z-[100] ${
     type === "success"
-      ? "bg-success"
+      ? "bg-green-600"
       : type === "error"
-        ? "bg-error"
-        : "bg-on-surface-variant"
+        ? "bg-red-600"
+        : "bg-gray-600"
   }`;
   notification.textContent = message;
   document.body.appendChild(notification);

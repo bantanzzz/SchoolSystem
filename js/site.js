@@ -60,20 +60,31 @@
       });
     });
 
-    document.querySelectorAll("a[data-action='logout']").forEach((anchor) => {
-      anchor.addEventListener("click", async (event) => {
+    document.querySelectorAll("a[data-action='logout'], button[data-action='logout']").forEach((element) => {
+      element.addEventListener("click", (event) => {
         event.preventDefault();
-        if (window.firebaseUtils && window.firebaseAuth) {
-          try {
-            await window.firebaseUtils.signOut(window.firebaseAuth);
-            showToast("Signed out successfully.");
-          } catch (error) {
-            console.warn(error);
-          }
+        // Check if we're on settings page - it has its own modal
+        if (window.location.pathname.includes("settings.html")) {
+          return; // Let settings.js handle it
         }
-        window.location.href = "./login.html";
+        // For other pages, show a simple confirmation
+        if (confirm("Are you sure you want to logout?")) {
+          performLogout();
+        }
       });
     });
+
+    async function performLogout() {
+      if (window.firebaseUtils && window.firebaseAuth) {
+        try {
+          await window.firebaseUtils.signOut(window.firebaseAuth);
+          showToast("Signed out successfully.");
+        } catch (error) {
+          console.warn(error);
+        }
+      }
+      window.location.href = "./login.html";
+    }
   }
 
   function setupAuth() {
