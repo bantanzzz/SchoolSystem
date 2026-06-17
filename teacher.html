@@ -210,47 +210,116 @@
                 </th>
               </tr>
             </thead>
-            <tbody>
-              <tr class="border-b border-outline-variant hover:bg-surface-container-high transition-colors">
-                <td class="px-lg py-4 font-label-md text-on-surface">TCH-001</td>
-                <td class="px-lg py-4 font-label-md text-on-surface">Mr. Ibrahim Kamara</td>
-                <td class="px-lg py-4 font-label-md text-on-surface">Mathematics</td>
-                <td class="px-lg py-4 font-label-md text-on-surface">ikamara@limkokwing.sl</td>
-                <td class="px-lg py-4 font-label-md text-success">Active</td>
-                <td class="px-lg py-4">
-                  <button class="px-3 py-1 bg-primary text-on-primary rounded-lg text-xs font-bold hover:bg-secondary transition-colors">
-                    View
-                  </button>
-                </td>
-              </tr>
-              <tr class="border-b border-outline-variant hover:bg-surface-container-high transition-colors">
-                <td class="px-lg py-4 font-label-md text-on-surface">TCH-002</td>
-                <td class="px-lg py-4 font-label-md text-on-surface">Mrs. Mariatu Conteh</td>
-                <td class="px-lg py-4 font-label-md text-on-surface">Science</td>
-                <td class="px-lg py-4 font-label-md text-on-surface">mconteh@limkokwing.sl</td>
-                <td class="px-lg py-4 font-label-md text-success">Active</td>
-                <td class="px-lg py-4">
-                  <button class="px-3 py-1 bg-primary text-on-primary rounded-lg text-xs font-bold hover:bg-secondary transition-colors">
-                    View
-                  </button>
-                </td>
-              </tr>
-              <tr class="border-b border-outline-variant hover:bg-surface-container-high transition-colors">
-                <td class="px-lg py-4 font-label-md text-on-surface">TCH-003</td>
-                <td class="px-lg py-4 font-label-md text-on-surface">Dr. Musa Bah</td>
-                <td class="px-lg py-4 font-label-md text-on-surface">Computer Science</td>
-                <td class="px-lg py-4 font-label-md text-on-surface">mbah@limkokwing.sl</td>
-                <td class="px-lg py-4 font-label-md text-on-surface">On Leave</td>
-                <td class="px-lg py-4">
-                  <button class="px-3 py-1 bg-primary text-on-primary rounded-lg text-xs font-bold hover:bg-secondary transition-colors">
-                    View
-                  </button>
-                </td>
-              </tr>
+            <tbody id="teachersTableBody">
+              <!-- Dynamically populated -->
             </tbody>
           </table>
         </div>
       </main>
+    </div>
+
+    <!-- Add/Edit Teacher Modal -->
+    <div id="teacherModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-surface-container-lowest rounded-lg p-lg max-w-md w-full mx-4">
+        <div class="flex justify-between items-center mb-lg">
+          <h3 class="font-headline-sm text-headline-sm text-on-surface" id="modalTitle">Add New Teacher</h3>
+          <button
+            type="button"
+            class="text-on-surface-variant hover:text-on-surface transition-colors"
+            data-action="close-modal"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+
+        <form id="teacherForm" class="space-y-md">
+          <div>
+            <label class="block font-label-md text-label-md text-on-surface mb-2">
+              Teacher Name <span class="text-error">*</span>
+            </label>
+            <input
+              type="text"
+              id="teacherName"
+              placeholder="e.g., Mr. Ibrahim Kamara"
+              class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg focus:ring-1 focus:ring-primary font-body-md text-body-md"
+              required
+            />
+          </div>
+
+          <div>
+            <label class="block font-label-md text-label-md text-on-surface mb-2">
+              Email <span class="text-error">*</span>
+            </label>
+            <input
+              type="email"
+              id="teacherEmail"
+              placeholder="e.g., ikamara@limkokwing.sl"
+              class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg focus:ring-1 focus:ring-primary font-body-md text-body-md"
+              required
+            />
+          </div>
+
+          <div>
+            <label class="block font-label-md text-label-md text-on-surface mb-2">
+              Department <span class="text-error">*</span>
+            </label>
+            <select
+              id="teacherDepartment"
+              class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg focus:ring-1 focus:ring-primary font-body-md text-body-md"
+              required
+            >
+              <option value="">Select Department</option>
+              <option value="Mathematics">Mathematics</option>
+              <option value="Science">Science</option>
+              <option value="Humanities">Humanities</option>
+              <option value="Computer Science">Computer Science</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-label-md text-label-md text-on-surface mb-2">
+              Phone Number
+            </label>
+            <input
+              type="tel"
+              id="teacherPhone"
+              placeholder="e.g., +232 76 123 456"
+              class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg focus:ring-1 focus:ring-primary font-body-md text-body-md"
+            />
+          </div>
+
+          <div>
+            <label class="block font-label-md text-label-md text-on-surface mb-2">
+              Status <span class="text-error">*</span>
+            </label>
+            <select
+              id="teacherStatus"
+              class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg focus:ring-1 focus:ring-primary font-body-md text-body-md"
+              required
+            >
+              <option value="Active">Active</option>
+              <option value="On Leave">On Leave</option>
+            </select>
+          </div>
+
+          <div class="flex gap-md pt-lg">
+            <button
+              type="submit"
+              class="flex-1 px-4 py-2 bg-primary text-on-primary rounded-lg hover:opacity-90 transition-all font-label-md text-label-md"
+              id="submitBtn"
+            >
+              Add Teacher
+            </button>
+            <button
+              type="button"
+              class="flex-1 px-4 py-2 bg-surface-container-low border border-outline-variant text-on-surface rounded-lg hover:bg-surface-container-high transition-all font-label-md text-label-md"
+              data-action="close-modal"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
     <script type="module" src="./js/firebase-config.js"></script>
     <script src="./js/site.js"></script>
