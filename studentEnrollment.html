@@ -1,0 +1,454 @@
+﻿<!doctype html>
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Student Enrollment - EduManage Pro</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="js/studentEnrollment-tailwind.config.js"></script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+        vertical-align: middle;
+      }
+      body {
+        background-color: #f7f9fb;
+        font-family: "Geist", sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-background text-on-background">
+    <!-- SideNavBar Shell -->
+    <aside
+      class="fixed left-0 top-0 h-full w-[280px] bg-surface-container-lowest border-r border-outline-variant flex flex-col py-lg z-50"
+    >
+      <div class="px-xl mb-xl">
+        <h1
+          class="font-headline-md text-headline-md font-bold text-primary tracking-tight"
+        >
+          Limkokwing University - Sierra Leone
+        </h1>
+        <p
+          class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mt-1"
+        >
+          Admin Portal
+        </p>
+      </div>
+      <nav class="flex-1 space-y-1 overflow-y-auto">
+        <a
+          class="flex items-center gap-md px-md py-md text-on-surface-variant hover:bg-surface-container-high transition-colors"
+          href="dashboard.html"
+        >
+          <span class="material-symbols-outlined">dashboard</span>
+          <span class="font-body-md">Dashboard</span>
+        </a>
+        <a
+          class="flex items-center gap-md px-md py-md bg-secondary-fixed text-on-secondary-fixed border-l-4 border-primary"
+          href="studentrecord.html"
+        >
+          <span class="material-symbols-outlined">school</span>
+          <span class="font-body-md font-medium">Students</span>
+        </a>
+        <a
+          class="flex items-center gap-md px-md py-md text-on-surface-variant hover:bg-surface-container-high transition-colors"
+          href="teacher.html"
+        >
+          <span class="material-symbols-outlined">person</span>
+          <span class="font-body-md">Teachers</span>
+        </a>
+        <a
+          class="flex items-center gap-md px-md py-md text-on-surface-variant hover:bg-surface-container-high transition-colors"
+          href="class.html"
+        >
+          <span class="material-symbols-outlined">group</span>
+          <span class="font-body-md">Classes</span>
+        </a>
+        <a
+          class="flex items-center gap-md px-md py-md text-on-surface-variant hover:bg-surface-container-high transition-colors"
+          href="#"
+        >
+          <span class="material-symbols-outlined">calendar_today</span>
+          <span class="font-body-md">Attendance</span>
+        </a>
+        <a
+          class="flex items-center gap-md px-md py-md text-on-surface-variant hover:bg-surface-container-high transition-colors"
+          href="report.html"
+        >
+          <span class="material-symbols-outlined">analytics</span>
+          <span class="font-body-md">Reports</span>
+        </a>
+      </nav>
+      <div class="mt-auto px-md py-sm border-t border-outline-variant">
+        <a
+          class="flex items-center gap-md px-md py-md text-on-surface-variant hover:bg-surface-container-high transition-colors"
+          href="#"
+        >
+          <span class="material-symbols-outlined">settings</span>
+          <span class="font-body-md">Settings</span>
+        </a>
+        <a
+          class="flex items-center gap-md px-md py-md text-on-surface-variant hover:bg-surface-container-high transition-colors"
+          href="#"
+          data-action="logout"
+        >
+          <span class="material-symbols-outlined">logout</span>
+          <span class="font-body-md">Logout</span>
+        </a>
+      </div>
+    </aside>
+    <!-- Main Content Area -->
+    <main class="ml-[280px] min-h-screen">
+      <!-- TopNavBar Shell -->
+      <header
+        class="flex justify-between items-center h-20 px-xl bg-surface-container-lowest border-b border-outline-variant sticky top-0 z-40"
+      >
+        <div class="flex items-center gap-md w-1/2">
+          <div class="relative w-full max-w-md">
+            <span
+              class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant"
+              >search</span
+            >
+            <input
+              class="w-full bg-surface-container-low pl-12 pr-4 py-3 rounded-full border-none focus:ring-2 focus:ring-primary/20 text-body-md"
+              placeholder="Search records..."
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="flex items-center gap-lg">
+          <button
+            class="relative text-on-surface-variant hover:text-primary p-2 rounded-full hover:bg-surface-container transition-all"
+          >
+            <span class="material-symbols-outlined">notifications</span>
+            <span
+              class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"
+            ></span>
+          </button>
+          <div
+            class="flex items-center gap-md border-l border-outline-variant pl-lg"
+          >
+            <div class="text-right">
+              <p class="font-label-md text-on-surface">Alusine Bangura</p>
+              <p
+                class="text-[10px] uppercase tracking-wider text-on-surface-variant font-bold"
+              >
+                Administrator
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- Page Canvas -->
+      <div class="p-xl max-w-5xl mx-auto">
+        <!-- Breadcrumbs & Header -->
+        <div class="mb-xl">
+          <nav
+            class="flex items-center gap-xs text-on-surface-variant font-label-sm mb-xs uppercase tracking-wider"
+          >
+            <a class="hover:text-primary" href="dashboard.html">Home</a>
+            <span class="material-symbols-outlined text-[16px]"
+              >chevron_right</span
+            >
+            <a class="hover:text-primary" href="studentrecord.html">Students</a>
+            <span class="material-symbols-outlined text-[16px]"
+              >chevron_right</span
+            >
+            <span class="text-primary font-bold">Enrollment</span>
+          </nav>
+          <h2 class="font-display text-headline-lg text-on-surface mb-xs">
+            Limkokwing Student Enrollment
+          </h2>
+          <p class="text-on-surface-variant font-body-md">
+            Register a new student for the 2024-2025 academic year.
+          </p>
+        </div>
+        <!-- Simplified Two-Column Form Layout -->
+        <form class="space-y-lg" id="enrollmentForm">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+            <!-- Left: Main Form Fields -->
+            <div class="md:col-span-2 space-y-lg">
+              <!-- Personal Info -->
+              <div
+                class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm space-y-md"
+              >
+                <div
+                  class="flex items-center gap-md border-b border-outline-variant pb-md mb-md"
+                >
+                  <span class="material-symbols-outlined text-primary"
+                    >person_add</span
+                  >
+                  <h3 class="font-headline-md text-on-surface">
+                    Personal Information
+                  </h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+                  <div class="space-y-base">
+                    <label class="font-label-md text-on-surface block"
+                      >Student ID</label
+                    >
+                    <input
+                      class="w-full rounded-lg border-outline-variant bg-surface-container-low text-on-surface-variant cursor-not-allowed"
+                      id="studentId"
+                      name="studentId"
+                      readonly=""
+                      required=""
+                      type="text"
+                      value="90500-24-001"
+                    />
+                  </div>
+                  <div class="space-y-base">
+                    <label class="font-label-md text-on-surface block"
+                      >Full Name</label
+                    >
+                    <input
+                      class="w-full rounded-lg border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary"
+                      id="fullName"
+                      name="fullName"
+                      placeholder="e.g., Musa Kallon"
+                      required=""
+                      type="text"
+                    />
+                  </div>
+                  <div class="space-y-base">
+                    <label class="font-label-md text-on-surface block"
+                      >Date of Birth</label
+                    >
+                    <input
+                      class="w-full rounded-lg border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary"
+                      id="dateOfBirth"
+                      name="dateOfBirth"
+                      required=""
+                      type="date"
+                    />
+                  </div>
+                  <div class="space-y-base">
+                    <label class="font-label-md text-on-surface block"
+                      >Gender</label
+                    >
+                    <select
+                      class="w-full rounded-lg border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary"
+                      id="gender"
+                      name="gender"
+                      required=""
+                    >
+                      <option value="">Select Gender</option>
+                      <option>Male</option>
+                      <option>Female</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                  <div class="md:col-span-2 space-y-base">
+                    <label class="font-label-md text-on-surface block"
+                      >Residential Address</label
+                    >
+                    <textarea
+                      class="w-full rounded-lg border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary"
+                      id="residentialAddress"
+                      name="residentialAddress"
+                      placeholder="Enter full address"
+                      required=""
+                      rows="2"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+              <!-- Guardian Info -->
+              <div
+                class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm space-y-md"
+              >
+                <div
+                  class="flex items-center gap-md border-b border-outline-variant pb-md mb-md"
+                >
+                  <span class="material-symbols-outlined text-tertiary"
+                    >family_restroom</span
+                  >
+                  <h3 class="font-headline-md text-on-surface">
+                    Guardian Details
+                  </h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+                  <div class="space-y-base">
+                    <label class="font-label-md text-on-surface block"
+                      >Guardian Name</label
+                    >
+                    <input
+                      class="w-full rounded-lg border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary"
+                      id="guardianName"
+                      name="guardianName"
+                      placeholder="Enter guardian name"
+                      required=""
+                      type="text"
+                    />
+                  </div>
+                  <div class="space-y-base">
+                    <label class="font-label-md text-on-surface block"
+                      >Primary Phone</label
+                    >
+                    <input
+                      class="w-full rounded-lg border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary"
+                      id="primaryPhone"
+                      name="primaryPhone"
+                      pattern="[0-9+() -]{7,20}"
+                      placeholder="+1 (555) 000-0000"
+                      required=""
+                      type="tel"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Right: Sidebar Actions & Details -->
+            <div class="space-y-lg">
+              <!-- Photo Upload -->
+              <div
+                class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm text-center"
+              >
+                <h3 class="font-label-md text-on-surface mb-md text-left">
+                  Student Photo
+                </h3>
+                <div
+                  class="w-24 h-24 bg-surface-container-high rounded-lg flex items-center justify-center mx-auto mb-sm border-2 border-dashed border-outline-variant"
+                >
+                  <span
+                    class="material-symbols-outlined text-outline text-[32px]"
+                    >add_a_photo</span
+                  >
+                </div>
+                <input
+                  class="hidden"
+                  accept="image/png,image/jpeg"
+                  id="studentPhoto"
+                  name="studentPhoto"
+                  type="file"
+                />
+                <button
+                  class="text-primary font-label-sm hover:underline"
+                  id="uploadPhoto"
+                  type="button"
+                >
+                  Upload Image
+                </button>
+                <p class="text-[10px] text-on-surface-variant mt-1">
+                  Max 2MB (JPG, PNG)
+                </p>
+              </div>
+              <!-- Academic Details -->
+              <div
+                class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm space-y-md"
+              >
+                <h3
+                  class="font-label-md text-on-surface border-b border-outline-variant pb-sm"
+                >
+                  Academic Details
+                </h3>
+                <div class="space-y-base">
+                  <label
+                    class="font-label-sm text-on-surface-variant block uppercase tracking-wider"
+                    for="gradeLevel"
+                    >Grade Level</label
+                  >
+                  <select
+                    class="w-full rounded-lg border-outline-variant text-body-md"
+                    id="gradeLevel"
+                    name="gradeLevel"
+                    required=""
+                  >
+                    <option value="">Select Grade</option>
+                    <option>Grade 9</option>
+                    <option>Grade 10</option>
+                    <option>Grade 11</option>
+                    <option>Grade 12</option>
+                  </select>
+                </div>
+                <div class="space-y-base">
+                  <label
+                    class="font-label-sm text-on-surface-variant block uppercase tracking-wider"
+                    for="majorSection"
+                    >Major/Section</label
+                  >
+                  <select
+                    class="w-full rounded-lg border-outline-variant text-body-md"
+                    id="majorSection"
+                    name="majorSection"
+                    required=""
+                  >
+                    <option value="">Select Section</option>
+                    <option>Section A</option>
+                    <option>Section B</option>
+                    <option>Science</option>
+                    <option>Arts</option>
+                  </select>
+                </div>
+              </div>
+              <!-- Action Buttons -->
+              <div
+                class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-sm space-y-sm"
+              >
+                <button
+                  class="w-full bg-primary text-on-primary py-3 rounded-lg font-label-md hover:bg-primary/90 transition-colors"
+                  type="submit"
+                >
+                  Complete University Enrollment
+                </button>
+                <button
+                  class="w-full border border-outline-variant text-on-surface py-3 rounded-lg font-label-md hover:bg-surface-container transition-colors"
+                  id="resetEnrollment"
+                  type="button"
+                >
+                  Reset Form
+                </button>
+                <button
+                  class="w-full text-error font-label-sm py-2 hover:underline"
+                  type="button"
+                >
+                  Cancel Registration
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <p class="hidden" id="formStatus" role="status"></p>
+        <!-- Bottom Info Cards -->
+        <div class="mt-xl grid grid-cols-1 md:grid-cols-2 gap-md">
+          <div
+            class="bg-surface-container-low p-md rounded-xl flex items-start gap-md border border-outline-variant/50"
+          >
+            <span class="material-symbols-outlined text-primary">info</span>
+            <div>
+              <p class="font-label-md text-on-surface">Required Fields</p>
+              <p class="text-label-sm text-on-surface-variant">
+                Please ensure all personal and guardian details are accurate as
+                per official identification documents.
+              </p>
+            </div>
+          </div>
+          <div
+            class="bg-surface-container-low p-md rounded-xl flex items-start gap-md border border-outline-variant/50"
+          >
+            <span class="material-symbols-outlined text-tertiary"
+              >security</span
+            >
+            <div>
+              <p class="font-label-md text-on-surface">Data Privacy</p>
+              <p class="text-label-sm text-on-surface-variant">
+                Enrollment data is stored securely and compliant with
+                educational privacy standards.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script type="module" src="js/firebase-config.js"></script>
+    <script src="js/site.js"></script>
+    <script src="js/studentEnrollment.js"></script>
+  </body>
+</html>

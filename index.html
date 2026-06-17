@@ -1,0 +1,263 @@
+﻿<!doctype html>
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Login | EduManage Pro - Limkokwing University Sierra Leone</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="js/index-tailwind.config.js"></script>
+    <style>
+      body {
+        font-family: "Geist", sans-serif;
+        background-color: #f8fafc;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+        vertical-align: middle;
+      }
+      .login-card-shadow {
+        box-shadow:
+          0 4px 6px -1px rgba(79, 70, 229, 0.05),
+          0 2px 4px -2px rgba(0, 0, 0, 0.03);
+      }
+      .input-focus-ring:focus {
+        box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
+      }
+    </style>
+  </head>
+  <body class="bg-surface text-on-surface min-h-screen flex flex-col">
+    <main class="flex-grow flex flex-col md:flex-row h-full">
+      <!-- Hero Section -->
+      <section
+        class="hidden md:flex md:w-1/2 lg:w-3/5 bg-primary overflow-hidden relative items-center justify-center"
+      >
+        <!-- Decorative Overlay -->
+        <div class="absolute inset-0 opacity-20 pointer-events-none">
+          <div
+            class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-secondary-container via-transparent to-transparent"
+          ></div>
+        </div>
+        <div class="relative z-10 p-xl text-on-primary max-w-2xl">
+          <h1 class="font-display text-display mb-md leading-tight">
+            Empowering Excellence in Sierra Leone.
+          </h1>
+          <p class="font-body-lg text-body-lg mb-lg text-primary-fixed">
+            Limkokwing University of Creative Technology is more than a campus.
+            It's a hub for digital innovation and global leadership in the heart
+            of Freetown.
+          </p>
+          <div class="flex gap-md">
+            <div class="flex flex-col">
+              <span class="font-headline-md text-headline-md">90500</span>
+              <span
+                class="font-label-sm text-label-sm uppercase tracking-wider text-primary-fixed opacity-70"
+                >Region Code</span
+              >
+            </div>
+            <div class="w-px h-12 bg-on-primary/20"></div>
+            <div class="flex flex-col">
+              <span class="font-headline-md text-headline-md">24/7</span>
+              <span
+                class="font-label-sm text-label-sm uppercase tracking-wider text-primary-fixed opacity-70"
+                >Portal Access</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="absolute bottom-0 right-0 w-full h-full -z-10">
+          <img
+            alt="Limkokwing Sierra Leone Campus Architecture"
+            class="w-full h-full object-cover mix-blend-overlay opacity-60"
+            data-alt="A cinematic, high-angle architectural shot of a modern, sleek university campus building featuring glass facades and contemporary geometric structures. The scene is bathed in a warm, golden sunset light that casts long, soft shadows across the manicured university grounds. The overall aesthetic is clean, professional, and prestigious, utilizing a palette of deep indigos and crisp whites to mirror a modern academic design system. This visual represents a center of higher learning and innovation in an urban Sierra Leone environment."
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbxz5Zst2yQZpW3LgQdtsTTcZeuEJobJlhIKDVfSYEnnW_eR2R0NFrN_Q9TJmRco1xYEmeHN4NFC-tPbC73DJI7KVrVySfHGPl9M8MH-BqfgnPRqiX1yXA7dkvfe-dmex5hzKImOhMhoaF_qOmzfsQmsM0Djk8LGWgJ80xx2PuAy7BosyVrs5RufhtKG8zsbqy8P54etvbD9e1CCUz3OiuCpAgjgu6Hr8MLaMpclyCjE8GglgxvK4dP1MbBz6okJw4WFl_n90aboM"
+          />
+        </div>
+      </section>
+      <!-- Form Section -->
+      <section
+        class="flex-grow flex items-center justify-center bg-surface p-margin-mobile md:p-margin-desktop"
+      >
+        <div
+          class="w-full max-w-md bg-surface-container-lowest p-lg md:p-xl rounded-xl login-card-shadow"
+        >
+          <!-- Brand Header -->
+          <div class="text-center mb-xl">
+            <div class="flex justify-center mb-sm">
+              <div
+                class="bg-primary p-xs rounded-lg inline-flex items-center justify-center"
+              >
+                <span
+                  class="material-symbols-outlined text-on-primary"
+                  style="font-size: 32px"
+                  >school</span
+                >
+              </div>
+            </div>
+            <h2
+              class="font-headline-lg-mobile md:font-headline-lg text-headline-lg text-primary font-bold"
+            >
+              EduManage Admin
+            </h2>
+            <p
+              class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mt-base"
+            >
+              Limkokwing Sierra Leone
+            </p>
+            <div
+              class="mt-md px-md py-xs bg-surface-container-low rounded-full inline-block"
+            >
+              <span
+                class="font-label-sm text-label-sm text-primary flex items-center gap-xs font-bold uppercase tracking-wider"
+              >
+                <span class="material-symbols-outlined text-[16px]"
+                  >admin_panel_settings</span
+                >
+                Authorized Personnel Only
+              </span>
+            </div>
+          </div>
+          <!-- Login Form -->
+          <form
+            action="dashboard.html"
+            class="space-y-md"
+            id="loginForm"
+            method="POST"
+          >
+            <div class="space-y-xs">
+              <label
+                class="font-label-md text-label-md text-on-surface-variant ml-xs"
+                for="student-id"
+                >Student/Staff ID</label
+              >
+              <div class="relative group">
+                <div
+                  class="absolute inset-y-0 left-0 pl-md flex items-center pointer-events-none"
+                >
+                  <span
+                    class="material-symbols-outlined text-outline text-[20px] group-focus-within:text-primary transition-colors"
+                    >person</span
+                  >
+                </div>
+                <input
+                  class="block w-full pl-xl pr-md py-md bg-surface-container-low border-0 rounded-xl font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all input-focus-ring outline-none ring-1 ring-outline-variant"
+                  id="student-id"
+                  name="student-id"
+                  placeholder="e.g., 90500-XX-XXX"
+                  required=""
+                  type="text"
+                />
+              </div>
+            </div>
+            <div class="space-y-xs">
+              <div class="flex justify-between items-center px-xs">
+                <label
+                  class="font-label-md text-label-md text-on-surface-variant"
+                  for="password"
+                  >Password</label
+                >
+                <a
+                  class="font-label-sm text-label-sm text-primary hover:underline"
+                  href="#"
+                  >Forgot Password?</a
+                >
+              </div>
+              <div class="relative group">
+                <div
+                  class="absolute inset-y-0 left-0 pl-md flex items-center pointer-events-none"
+                >
+                  <span
+                    class="material-symbols-outlined text-outline text-[20px] group-focus-within:text-primary transition-colors"
+                    >lock</span
+                  >
+                </div>
+                <input
+                  class="block w-full pl-xl pr-md py-md bg-surface-container-low border-0 rounded-xl font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all input-focus-ring outline-none ring-1 ring-outline-variant"
+                  id="password"
+                  name="password"
+                  placeholder="••••••••"
+                  required=""
+                  type="password"
+                />
+              </div>
+            </div>
+            <div class="flex items-center gap-xs px-xs">
+              <input
+                class="w-4 h-4 rounded text-primary focus:ring-primary/50 border-outline-variant"
+                id="remember"
+                name="remember"
+                type="checkbox"
+              />
+              <label
+                class="font-label-sm text-label-sm text-on-surface-variant select-none"
+                for="remember"
+                >Keep me signed in for 30 days</label
+              >
+            </div>
+            <button
+              class="w-full py-md px-lg bg-primary text-on-primary font-label-md text-label-md rounded-xl hover:bg-secondary active:scale-[0.98] transition-all flex items-center justify-center gap-sm"
+              type="submit"
+            >
+              Sign In to Portal
+              <span class="material-symbols-outlined">login</span>
+            </button>
+          </form>
+          <!-- Help Link -->
+        </div>
+      </section>
+    </main>
+    <!-- Footer Links -->
+    <footer
+      class="bg-surface py-md px-margin-mobile md:px-margin-desktop border-t border-outline-variant/30"
+    >
+      <div
+        class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-sm"
+      >
+        <div class="flex items-center gap-xs">
+          <span
+            class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"
+          ></span>
+          <p class="font-label-sm text-label-sm text-on-surface-variant">
+            System Status: All systems operational
+          </p>
+        </div>
+        <nav class="flex gap-md">
+          <a
+            class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
+            href="#"
+            >Privacy Policy</a
+          >
+          <a
+            class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
+            href="#"
+            >IT Support</a
+          >
+          <a
+            class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
+            href="#"
+            >Contact Registrar</a
+          >
+        </nav>
+        <p class="font-label-sm text-label-sm text-outline">© 2024 Limkokwing University Sierra Leone</p>
+      </div>
+    </footer>
+    <script type="module" src="js/firebase-config.js"></script>
+    <script src="js/site.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>

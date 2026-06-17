@@ -1,0 +1,480 @@
+﻿<!doctype html>
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Student Records &amp; Reporting | EduManage Pro</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="js/studentrecord-tailwind.config.js"></script>
+    <style>
+      body {
+        font-family: "Geist", sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+    </style>
+  </head>
+  <body class="bg-background text-on-background">
+    <!-- SideNavBar Shell -->
+    <aside
+      class="fixed left-0 top-0 h-full w-[280px] bg-surface-container-lowest border-r border-outline-variant flex flex-col py-lg z-50"
+    >
+      <div class="px-md mb-xl">
+        <h1 class="font-display text-[24px] font-bold text-primary">
+          Limkokwing University - Sierra Leone
+        </h1>
+        <p
+          class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+        >
+          Admin Portal
+        </p>
+      </div>
+      <nav class="flex-1 space-y-1">
+        <a
+          class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-low transition-colors"
+          href="dashboard.html"
+        >
+          <span class="material-symbols-outlined">dashboard</span>
+          <span class="font-label-md text-label-md">Dashboard</span>
+        </a>
+        <a
+          class="flex items-center gap-md px-md py-sm bg-primary-fixed text-on-primary-fixed-variant border-l-4 border-primary rounded-r-lg"
+          href="studentrecord.html"
+        >
+          <span class="material-symbols-outlined">school</span>
+          <span class="font-label-md text-label-md">Students</span>
+        </a>
+        <a
+          class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-low transition-colors"
+          href="teacher.html"
+        >
+          <span class="material-symbols-outlined">person</span>
+          <span class="font-label-md text-label-md">Teachers</span>
+        </a>
+        <a
+          class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-low transition-colors"
+          href="class.html"
+        >
+          <span class="material-symbols-outlined">group</span>
+          <span class="font-label-md text-label-md">Classes</span>
+        </a>
+        <a
+          class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-low transition-colors"
+          href="#"
+        >
+          <span class="material-symbols-outlined">calendar_today</span>
+          <span class="font-label-md text-label-md">Attendance</span>
+        </a>
+        <a
+          class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-low transition-colors"
+          href="report.html"
+        >
+          <span class="material-symbols-outlined">analytics</span>
+          <span class="font-label-md text-label-md">Reports</span>
+        </a>
+        <a
+          class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-low transition-colors"
+          href="#"
+          data-action="logout"
+        >
+          <span class="material-symbols-outlined">logout</span>
+          <span class="font-label-md text-label-md">Logout</span>
+        </a>
+      </nav>
+      <div class="mt-auto border-t border-outline-variant pt-md">
+        <a
+          class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-low transition-colors"
+          href="#"
+        >
+          <span class="material-symbols-outlined">settings</span>
+          <span class="font-label-md text-label-md">Settings</span>
+        </a>
+        <a
+          class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-low transition-colors"
+          href="#"
+          data-action="logout"
+        >
+          <span class="material-symbols-outlined">logout</span>
+          <span class="font-label-md text-label-md">Logout</span>
+        </a>
+      </div>
+    </aside>
+    <!-- Main Content Area -->
+    <div class="ml-[280px] w-[calc(100%_-_280px)] min-h-screen flex flex-col">
+      <!-- TopNavBar Shell -->
+      <header
+        class="flex justify-between items-center h-20 px-xl bg-surface-container-lowest sticky top-0 z-40 border-b border-outline-variant"
+      >
+        <div class="flex items-center gap-md flex-1">
+          <h2 class="font-headline-md text-headline-md text-on-surface">
+            Student Records
+          </h2>
+        </div>
+        <div class="flex items-center gap-lg">
+          <div class="flex items-center gap-sm">
+            <button
+              class="p-2.5 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors relative"
+            >
+              <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <button
+              class="p-2.5 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors"
+            >
+              <span class="material-symbols-outlined">help</span>
+            </button>
+          </div>
+          <div class="h-10 w-[1px] bg-outline-variant"></div>
+          <div class="flex items-center gap-md">
+            <img
+              alt="Admin Profile"
+              class="w-9 h-9 rounded-full object-cover"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAHrbazKxuulVayfmZnIsroGv1ONTciBpIQFPHybQvkLeZLX4e4lglqjE57E6Kg5mssVBoouIEagOiLqAHSU4p_tbyE1jszY5vSxLpxJmORLPVx9GzpWNVz4NrkfiIMb_v8leqHPFFXC0diVmMPDkwh10q4YX0NdfKhfL71nb-vvomDFxOKmRpc9iGpTBs4-T6gUaXww9ifdqcqrSsSyhfhDB3r_qd8ypWoaiR3J5qAYdoETS4jmiukAZ_EujjrOU2SBy_d_vdvcs"
+            />
+            <span class="font-label-md text-label-md">Alusine Bangura</span>
+          </div>
+        </div>
+      </header>
+      <!-- Page Content -->
+      <main class="p-xl flex-1">
+        <!-- Streamlined Search & Filter Row -->
+        <div
+          class="bg-surface-container-lowest p-md border border-outline-variant rounded-lg mb-lg flex flex-wrap items-center gap-md"
+        >
+          <div class="relative flex-1 min-w-[300px]">
+            <span
+              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]"
+              >search</span
+            >
+            <input
+              class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-lg focus:ring-1 focus:ring-primary font-body-md text-body-md"
+              placeholder="Search student records (e.g., 90500-001)..."
+              type="text"
+            />
+          </div>
+          <select
+            class="px-4 py-2 bg-surface-container-low border border-outline-variant rounded-lg font-label-md text-label-md focus:ring-1 focus:ring-primary"
+          >
+            <option>Filter by Class</option>
+            <option>Grade 10-A</option>
+            <option>Grade 10-B</option>
+            <option>Grade 11-A</option>
+          </select>
+          <select
+            class="px-4 py-2 bg-surface-container-low border border-outline-variant rounded-lg font-label-md text-label-md focus:ring-1 focus:ring-primary"
+          >
+            <option>Filter by Status</option>
+            <option>Active</option>
+            <option>Inactive</option>
+          </select>
+          <div class="flex gap-2 ml-auto">
+            <a
+              class="px-4 py-2 bg-primary text-on-primary rounded-lg hover:opacity-90 transition-all font-label-md text-label-md"
+              href="studentEnrollment.html"
+            >
+              New Enrollment
+            </a>
+            <button
+              class="px-4 py-2 bg-surface-container-lowest border border-outline-variant text-on-surface rounded-lg hover:bg-surface-container-high transition-all font-label-md text-label-md"
+              data-action="print"
+            >
+              Print
+            </button>
+            <button
+              class="px-4 py-2 bg-primary text-on-primary rounded-lg hover:opacity-90 transition-all font-label-md text-label-md"
+              data-action="export"
+            >
+              Export Excel
+            </button>
+          </div>
+        </div>
+        <!-- Simple Table Structure -->
+        <div
+          class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden"
+        >
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr
+                class="bg-surface-container-low border-b border-outline-variant"
+              >
+                <th
+                  class="px-lg py-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                >
+                  ID
+                </th>
+                <th
+                  class="px-lg py-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                >
+                  Student Name
+                </th>
+                <th
+                  class="px-lg py-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                >
+                  Class
+                </th>
+                <th
+                  class="px-lg py-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                >
+                  Attendance
+                </th>
+                <th
+                  class="px-lg py-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider"
+                >
+                  Status
+                </th>
+                <th
+                  class="px-lg py-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider text-right"
+                >
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-outline-variant">
+              <!-- Row 1 -->
+              <tr class="hover:bg-surface-container-low transition-colors">
+                <td
+                  class="px-lg py-4 font-label-md text-label-md text-on-surface"
+                >
+                  90500-001
+                </td>
+                <td class="px-lg py-4">
+                  <div class="flex items-center gap-sm">
+                    <div
+                      class="w-8 h-8 rounded bg-primary-fixed text-primary font-bold text-xs flex items-center justify-center"
+                    >
+                      FK
+                    </div>
+                    <span class="font-body-md text-body-md text-on-surface"
+                      >Fatmata Koroma</span
+                    >
+                  </div>
+                </td>
+                <td
+                  class="px-lg py-4 font-body-md text-body-md text-on-surface-variant"
+                >
+                  BIT Year 3
+                </td>
+                <td class="px-lg py-4">
+                  <span class="font-label-md text-label-md text-on-surface"
+                    >98%</span
+                  >
+                </td>
+                <td class="px-lg py-4">
+                  <span
+                    class="inline-block px-2 py-0.5 rounded border border-green-200 bg-green-50 text-green-700 text-[11px] font-bold uppercase"
+                    >Active</span
+                  >
+                </td>
+                <td class="px-lg py-4 text-right">
+                  <button class="text-outline hover:text-primary p-1">
+                    <span class="material-symbols-outlined text-[20px]"
+                      >edit</span
+                    >
+                  </button>
+                  <button class="text-outline hover:text-error p-1">
+                    <span class="material-symbols-outlined text-[20px]"
+                      >delete</span
+                    >
+                  </button>
+                </td>
+              </tr>
+              <!-- Row 2 -->
+              <tr class="hover:bg-surface-container-low transition-colors">
+                <td
+                  class="px-lg py-4 font-label-md text-label-md text-on-surface"
+                >
+                  90500-045
+                </td>
+                <td class="px-lg py-4">
+                  <div class="flex items-center gap-sm">
+                    <div
+                      class="w-8 h-8 rounded bg-tertiary-fixed text-tertiary font-bold text-xs flex items-center justify-center"
+                    >
+                      MK
+                    </div>
+                    <span class="font-body-md text-body-md text-on-surface"
+                      >Mohamed Kamara</span
+                    >
+                  </div>
+                </td>
+                <td
+                  class="px-lg py-4 font-body-md text-body-md text-on-surface-variant"
+                >
+                  BSCM Year 1
+                </td>
+                <td class="px-lg py-4">
+                  <span class="font-label-md text-label-md text-on-surface"
+                    >82%</span
+                  >
+                </td>
+                <td class="px-lg py-4">
+                  <span
+                    class="inline-block px-2 py-0.5 rounded border border-green-200 bg-green-50 text-green-700 text-[11px] font-bold uppercase"
+                    >Active</span
+                  >
+                </td>
+                <td class="px-lg py-4 text-right">
+                  <button class="text-outline hover:text-primary p-1">
+                    <span class="material-symbols-outlined text-[20px]"
+                      >edit</span
+                    >
+                  </button>
+                  <button class="text-outline hover:text-error p-1">
+                    <span class="material-symbols-outlined text-[20px]"
+                      >delete</span
+                    >
+                  </button>
+                </td>
+              </tr>
+              <!-- Row 3 -->
+              <tr class="hover:bg-surface-container-low transition-colors">
+                <td
+                  class="px-lg py-4 font-label-md text-label-md text-on-surface"
+                >
+                  90500-089
+                </td>
+                <td class="px-lg py-4">
+                  <div class="flex items-center gap-sm">
+                    <div
+                      class="w-8 h-8 rounded bg-error-container text-on-error-container font-bold text-xs flex items-center justify-center"
+                    >
+                      SS
+                    </div>
+                    <span class="font-body-md text-body-md text-on-surface"
+                      >Sahr Sesay</span
+                    >
+                  </div>
+                </td>
+                <td
+                  class="px-lg py-4 font-body-md text-body-md text-on-surface-variant"
+                >
+                  BICT Year 2
+                </td>
+                <td class="px-lg py-4">
+                  <span class="font-label-md text-label-md text-on-surface"
+                    >64%</span
+                  >
+                </td>
+                <td class="px-lg py-4">
+                  <span
+                    class="inline-block px-2 py-0.5 rounded border border-outline-variant bg-surface-container-low text-on-surface-variant text-[11px] font-bold uppercase"
+                    >Inactive</span
+                  >
+                </td>
+                <td class="px-lg py-4 text-right">
+                  <button class="text-outline hover:text-primary p-1">
+                    <span class="material-symbols-outlined text-[20px]"
+                      >edit</span
+                    >
+                  </button>
+                  <button class="text-outline hover:text-error p-1">
+                    <span class="material-symbols-outlined text-[20px]"
+                      >delete</span
+                    >
+                  </button>
+                </td>
+              </tr>
+              <!-- Row 4 -->
+              <tr class="hover:bg-surface-container-low transition-colors">
+                <td
+                  class="px-lg py-4 font-label-md text-label-md text-on-surface"
+                >
+                  90500-112
+                </td>
+                <td class="px-lg py-4">
+                  <div class="flex items-center gap-sm">
+                    <div
+                      class="w-8 h-8 rounded bg-secondary-fixed text-on-secondary-fixed font-bold text-xs flex items-center justify-center"
+                    >
+                      IB
+                    </div>
+                    <span class="font-body-md text-body-md text-on-surface"
+                      >Isatu Bah</span
+                    >
+                  </div>
+                </td>
+                <td
+                  class="px-lg py-4 font-body-md text-body-md text-on-surface-variant"
+                >
+                  BIT Year 3
+                </td>
+                <td class="px-lg py-4">
+                  <span class="font-label-md text-label-md text-on-surface"
+                    >95%</span
+                  >
+                </td>
+                <td class="px-lg py-4">
+                  <span
+                    class="inline-block px-2 py-0.5 rounded border border-green-200 bg-green-50 text-green-700 text-[11px] font-bold uppercase"
+                    >Active</span
+                  >
+                </td>
+                <td class="px-lg py-4 text-right">
+                  <button class="text-outline hover:text-primary p-1">
+                    <span class="material-symbols-outlined text-[20px]"
+                      >edit</span
+                    >
+                  </button>
+                  <button class="text-outline hover:text-error p-1">
+                    <span class="material-symbols-outlined text-[20px]"
+                      >delete</span
+                    >
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Simple Pagination Controls -->
+          <div
+            class="px-lg py-4 border-t border-outline-variant flex items-center justify-between"
+          >
+            <span class="text-label-md text-on-surface-variant"
+              >1 to 4 of 1,248 students</span
+            >
+            <div class="flex gap-1">
+              <button
+                class="px-3 py-1.5 border border-outline-variant rounded hover:bg-surface-container-high transition-colors text-label-md"
+              >
+                Prev
+              </button>
+              <button
+                class="px-3 py-1.5 bg-primary text-on-primary rounded text-label-md"
+              >
+                1
+              </button>
+              <button
+                class="px-3 py-1.5 border border-outline-variant rounded hover:bg-surface-container-high transition-colors text-label-md"
+              >
+                2
+              </button>
+              <button
+                class="px-3 py-1.5 border border-outline-variant rounded hover:bg-surface-container-high transition-colors text-label-md"
+              >
+                3
+              </button>
+              <button
+                class="px-3 py-1.5 border border-outline-variant rounded hover:bg-surface-container-high transition-colors text-label-md"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    <script type="module" src="js/firebase-config.js"></script>
+    <script src="js/site.js"></script>
+    </div>
+  </body>
+</html>
