@@ -3,7 +3,7 @@
 
   if (reportButton) {
     reportButton.addEventListener("click", () => {
-      window.location.href = "report.html";
+      window.location.href = "./report.html";
     });
   }
 });

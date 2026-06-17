@@ -1,6 +1,7 @@
 (function () {
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
-  const isLoginPage = currentPage === "index.html" || currentPage === "";
+  const isLoginPage = currentPage === "login.html";
+  const isLandingPage = currentPage === "index.html" || currentPage === "";
 
   function showToast(message) {
     if (window.Notification && Notification.permission === "granted") {
@@ -37,7 +38,7 @@
 
     document.querySelectorAll("button[data-action='new-report']").forEach((button) => {
       button.addEventListener("click", () => {
-        window.location.href = "report.html";
+        window.location.href = "./report.html";
       });
     });
 
@@ -53,6 +54,12 @@
       });
     });
 
+    document.querySelectorAll("button[data-action='coming-soon']").forEach((button) => {
+      button.addEventListener("click", () => {
+        showToast("More features are coming soon.");
+      });
+    });
+
     document.querySelectorAll("a[data-action='logout']").forEach((anchor) => {
       anchor.addEventListener("click", async (event) => {
         event.preventDefault();
@@ -64,7 +71,7 @@
             console.warn(error);
           }
         }
-        window.location.href = "index.html";
+        window.location.href = "./login.html";
       });
     });
   }
@@ -77,51 +84,52 @@
 
     const { onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword } = window.firebaseUtils;
 
-    if (isLoginPage) {
-      onAuthStateChanged(window.firebaseAuth, (user) => {
-        if (user) {
-          window.location.href = "dashboard.html";
+    onAuthStateChanged(window.firebaseAuth, (user) => {
+      if (user) {
+        if (isLoginPage || isLandingPage) {
+          window.location.href = "./dashboard.html";
         }
-      });
-
-      const loginForm = document.getElementById("loginForm");
-      if (loginForm) {
-        loginForm.addEventListener("submit", async (event) => {
-          event.preventDefault();
-          if (!loginForm.checkValidity()) {
-            loginForm.reportValidity();
-            return;
-          }
-
-          const userId = document.getElementById("student-id")?.value || "";
-          const password = document.getElementById("password")?.value || "";
-          const email = buildFirebaseEmail(userId);
-
-          try {
-            await signInWithEmailAndPassword(window.firebaseAuth, email, password);
-            window.location.href = "dashboard.html";
-          } catch (error) {
-            if (error.code === "auth/user-not-found") {
-              try {
-                await createUserWithEmailAndPassword(window.firebaseAuth, email, password);
-                window.location.href = "dashboard.html";
-              } catch (createError) {
-                showToast(createError.message || "Unable to create account.");
-              }
-            } else {
-              showToast(error.message || "Login failed.");
-            }
-          }
-        });
+      } else {
+        if (!isLoginPage && !isLandingPage) {
+          window.location.href = "./login.html";
+        }
       }
+    });
+
+    if (!isLoginPage) {
       return;
     }
 
-    onAuthStateChanged(window.firebaseAuth, (user) => {
-      if (!user) {
-        window.location.href = "index.html";
-      }
-    });
+    const loginForm = document.getElementById("loginForm");
+    if (loginForm) {
+      loginForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (!loginForm.checkValidity()) {
+          loginForm.reportValidity();
+          return;
+        }
+
+        const userId = document.getElementById("student-id")?.value || "";
+        const password = document.getElementById("password")?.value || "";
+        const email = buildFirebaseEmail(userId);
+
+        try {
+          await signInWithEmailAndPassword(window.firebaseAuth, email, password);
+          window.location.href = "./dashboard.html";
+        } catch (error) {
+          if (error.code === "auth/user-not-found") {
+            try {
+              await createUserWithEmailAndPassword(window.firebaseAuth, email, password);
+              window.location.href = "./dashboard.html";
+            } catch (createError) {
+              showToast(createError.message || "Unable to create account.");
+            }
+          } else {
+            showToast(error.message || "Login failed.");
+          }
+        }
+      });
+    }
   }
 
   function setupEnrollment() {
@@ -159,7 +167,7 @@
       try {
         await addDoc(collection(window.firebaseDb, "enrollments"), payload);
         showToast("Student enrolled successfully.");
-        window.location.href = "studentrecord.html";
+        window.location.href = "./studentrecord.html";
       } catch (error) {
         showToast(error.message || "Enrollment save failed.");
       }
@@ -174,7 +182,7 @@
     const reportButton = document.getElementById("generateCampusReport");
     if (reportButton) {
       reportButton.addEventListener("click", () => {
-        window.location.href = "report.html";
+        window.location.href = "./report.html";
       });
     }
   }

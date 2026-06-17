@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Login | EduManage Pro - Limkokwing University Sierra Leone</title>
+    <title>EduManage Pro | Limkokwing University Sierra Leone</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
@@ -17,7 +17,7 @@
       href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap"
       rel="stylesheet"
     />
-    <script src="js/index-tailwind.config.js"></script>
+    <script src="./js/index-tailwind.config.js"></script>
     <style>
       body {
         font-family: "Geist", sans-serif;
@@ -31,233 +31,110 @@
           "opsz" 24;
         vertical-align: middle;
       }
-      .login-card-shadow {
+      .card-shadow {
         box-shadow:
-          0 4px 6px -1px rgba(79, 70, 229, 0.05),
-          0 2px 4px -2px rgba(0, 0, 0, 0.03);
-      }
-      .input-focus-ring:focus {
-        box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
+          0 10px 30px -15px rgba(15, 23, 42, 0.18);
       }
     </style>
   </head>
   <body class="bg-surface text-on-surface min-h-screen flex flex-col">
-    <main class="flex-grow flex flex-col md:flex-row h-full">
-      <!-- Hero Section -->
-      <section
-        class="hidden md:flex md:w-1/2 lg:w-3/5 bg-primary overflow-hidden relative items-center justify-center"
-      >
-        <!-- Decorative Overlay -->
-        <div class="absolute inset-0 opacity-20 pointer-events-none">
-          <div
-            class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-secondary-container via-transparent to-transparent"
-          ></div>
-        </div>
-        <div class="relative z-10 p-xl text-on-primary max-w-2xl">
-          <h1 class="font-display text-display mb-md leading-tight">
-            Empowering Excellence in Sierra Leone.
-          </h1>
-          <p class="font-body-lg text-body-lg mb-lg text-primary-fixed">
-            Limkokwing University of Creative Technology is more than a campus.
-            It's a hub for digital innovation and global leadership in the heart
-            of Freetown.
-          </p>
-          <div class="flex gap-md">
-            <div class="flex flex-col">
-              <span class="font-headline-md text-headline-md">90500</span>
-              <span
-                class="font-label-sm text-label-sm uppercase tracking-wider text-primary-fixed opacity-70"
-                >Region Code</span
-              >
+    <main class="flex-grow flex flex-col">
+      <section class="relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-indigo-700 to-cyan-600 opacity-95"></div>
+        <div class="relative max-w-7xl mx-auto px-6 py-24 lg:px-8">
+          <div class="grid gap-12 lg:grid-cols-[1.2fr_0.9fr] items-center">
+            <div class="text-white max-w-2xl">
+              <p class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.2em] text-white/80">
+                <span class="material-symbols-outlined">school</span>
+                Limkokwing University Portal
+              </p>
+              <h1 class="mt-10 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                Campus management made simple.
+              </h1>
+              <p class="mt-6 max-w-xl text-lg leading-8 text-white/80">
+                Sign in to manage student enrollment, teacher assignments, class schedules, and campus reports from one secure portal.
+              </p>
+              <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+                <a
+                  href="./login.html"
+                  class="inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 text-sm font-semibold text-slate-950 shadow-lg shadow-slate-950/10 transition hover:bg-slate-100"
+                >
+                  Enter Portal
+                  <span class="material-symbols-outlined ml-2">login</span>
+                </a>
+                <a
+                  href="#overview"
+                  class="inline-flex items-center justify-center rounded-xl border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+                >
+                  Learn More
+                  <span class="material-symbols-outlined ml-2">help</span>
+                </a>
+              </div>
             </div>
-            <div class="w-px h-12 bg-on-primary/20"></div>
-            <div class="flex flex-col">
-              <span class="font-headline-md text-headline-md">24/7</span>
-              <span
-                class="font-label-sm text-label-sm uppercase tracking-wider text-primary-fixed opacity-70"
-                >Portal Access</span
-              >
+            <div class="rounded-[2rem] border border-white/10 bg-white/10 p-8 shadow-2xl shadow-slate-950/10 backdrop-blur-xl card-shadow">
+              <div class="space-y-6 text-white">
+                <div>
+                  <p class="text-sm uppercase tracking-[0.2em] text-white/70">Portal Highlights</p>
+                  <h2 class="mt-4 text-3xl font-semibold">Campus administration streamlined.</h2>
+                </div>
+                <div class="grid gap-4 sm:grid-cols-2">
+                  <div class="rounded-3xl bg-slate-950/10 p-5">
+                    <h3 class="text-base font-semibold">Student Records</h3>
+                    <p class="mt-2 text-sm text-white/70">Enrollments, profiles, and academic progress in one place.</p>
+                  </div>
+                  <div class="rounded-3xl bg-slate-950/10 p-5">
+                    <h3 class="text-base font-semibold">Teacher Management</h3>
+                    <p class="mt-2 text-sm text-white/70">Staff schedules, subject assignments, and classroom oversight.</p>
+                  </div>
+                  <div class="rounded-3xl bg-slate-950/10 p-5">
+                    <h3 class="text-base font-semibold">Class Scheduling</h3>
+                    <p class="mt-2 text-sm text-white/70">Organize timetables, rooms, and class load quickly.</p>
+                  </div>
+                  <div class="rounded-3xl bg-slate-950/10 p-5">
+                    <h3 class="text-base font-semibold">Reports</h3>
+                    <p class="mt-2 text-sm text-white/70">Generate attendance, performance, and enrollment summaries.</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="absolute bottom-0 right-0 w-full h-full -z-10">
-          <img
-            alt="Limkokwing Sierra Leone Campus Architecture"
-            class="w-full h-full object-cover mix-blend-overlay opacity-60"
-            data-alt="A cinematic, high-angle architectural shot of a modern, sleek university campus building featuring glass facades and contemporary geometric structures. The scene is bathed in a warm, golden sunset light that casts long, soft shadows across the manicured university grounds. The overall aesthetic is clean, professional, and prestigious, utilizing a palette of deep indigos and crisp whites to mirror a modern academic design system. This visual represents a center of higher learning and innovation in an urban Sierra Leone environment."
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbxz5Zst2yQZpW3LgQdtsTTcZeuEJobJlhIKDVfSYEnnW_eR2R0NFrN_Q9TJmRco1xYEmeHN4NFC-tPbC73DJI7KVrVySfHGPl9M8MH-BqfgnPRqiX1yXA7dkvfe-dmex5hzKImOhMhoaF_qOmzfsQmsM0Djk8LGWgJ80xx2PuAy7BosyVrs5RufhtKG8zsbqy8P54etvbD9e1CCUz3OiuCpAgjgu6Hr8MLaMpclyCjE8GglgxvK4dP1MbBz6okJw4WFl_n90aboM"
-          />
         </div>
       </section>
-      <!-- Form Section -->
-      <section
-        class="flex-grow flex items-center justify-center bg-surface p-margin-mobile md:p-margin-desktop"
-      >
-        <div
-          class="w-full max-w-md bg-surface-container-lowest p-lg md:p-xl rounded-xl login-card-shadow"
-        >
-          <!-- Brand Header -->
-          <div class="text-center mb-xl">
-            <div class="flex justify-center mb-sm">
-              <div
-                class="bg-primary p-xs rounded-lg inline-flex items-center justify-center"
-              >
-                <span
-                  class="material-symbols-outlined text-on-primary"
-                  style="font-size: 32px"
-                  >school</span
-                >
-              </div>
-            </div>
-            <h2
-              class="font-headline-lg-mobile md:font-headline-lg text-headline-lg text-primary font-bold"
-            >
-              EduManage Admin
-            </h2>
-            <p
-              class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mt-base"
-            >
-              Limkokwing Sierra Leone
-            </p>
-            <div
-              class="mt-md px-md py-xs bg-surface-container-low rounded-full inline-block"
-            >
-              <span
-                class="font-label-sm text-label-sm text-primary flex items-center gap-xs font-bold uppercase tracking-wider"
-              >
-                <span class="material-symbols-outlined text-[16px]"
-                  >admin_panel_settings</span
-                >
-                Authorized Personnel Only
-              </span>
-            </div>
+
+      <section id="overview" class="bg-surface py-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+          <div class="grid gap-10 lg:grid-cols-3">
+            <article class="rounded-3xl border border-outline-variant/40 bg-white p-8 shadow-sm">
+              <h3 class="font-semibold text-xl">Secure Authentication</h3>
+              <p class="mt-3 text-sm text-slate-600">Login securely with your Limkokwing credentials and keep access protected.</p>
+            </article>
+            <article class="rounded-3xl border border-outline-variant/40 bg-white p-8 shadow-sm">
+              <h3 class="font-semibold text-xl">Fast Navigation</h3>
+              <p class="mt-3 text-sm text-slate-600">Quick links to dashboard, student records, teachers, class management, and reports.</p>
+            </article>
+            <article class="rounded-3xl border border-outline-variant/40 bg-white p-8 shadow-sm">
+              <h3 class="font-semibold text-xl">Modern Dashboard</h3>
+              <p class="mt-3 text-sm text-slate-600">A single dashboard for campus oversight and action items.</p>
+            </article>
           </div>
-          <!-- Login Form -->
-          <form
-            action="dashboard.html"
-            class="space-y-md"
-            id="loginForm"
-            method="POST"
-          >
-            <div class="space-y-xs">
-              <label
-                class="font-label-md text-label-md text-on-surface-variant ml-xs"
-                for="student-id"
-                >Student/Staff ID</label
-              >
-              <div class="relative group">
-                <div
-                  class="absolute inset-y-0 left-0 pl-md flex items-center pointer-events-none"
-                >
-                  <span
-                    class="material-symbols-outlined text-outline text-[20px] group-focus-within:text-primary transition-colors"
-                    >person</span
-                  >
-                </div>
-                <input
-                  class="block w-full pl-xl pr-md py-md bg-surface-container-low border-0 rounded-xl font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all input-focus-ring outline-none ring-1 ring-outline-variant"
-                  id="student-id"
-                  name="student-id"
-                  placeholder="e.g., 90500-XX-XXX"
-                  required=""
-                  type="text"
-                />
-              </div>
-            </div>
-            <div class="space-y-xs">
-              <div class="flex justify-between items-center px-xs">
-                <label
-                  class="font-label-md text-label-md text-on-surface-variant"
-                  for="password"
-                  >Password</label
-                >
-                <a
-                  class="font-label-sm text-label-sm text-primary hover:underline"
-                  href="#"
-                  >Forgot Password?</a
-                >
-              </div>
-              <div class="relative group">
-                <div
-                  class="absolute inset-y-0 left-0 pl-md flex items-center pointer-events-none"
-                >
-                  <span
-                    class="material-symbols-outlined text-outline text-[20px] group-focus-within:text-primary transition-colors"
-                    >lock</span
-                  >
-                </div>
-                <input
-                  class="block w-full pl-xl pr-md py-md bg-surface-container-low border-0 rounded-xl font-body-md text-body-md text-on-surface focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all input-focus-ring outline-none ring-1 ring-outline-variant"
-                  id="password"
-                  name="password"
-                  placeholder="••••••••"
-                  required=""
-                  type="password"
-                />
-              </div>
-            </div>
-            <div class="flex items-center gap-xs px-xs">
-              <input
-                class="w-4 h-4 rounded text-primary focus:ring-primary/50 border-outline-variant"
-                id="remember"
-                name="remember"
-                type="checkbox"
-              />
-              <label
-                class="font-label-sm text-label-sm text-on-surface-variant select-none"
-                for="remember"
-                >Keep me signed in for 30 days</label
-              >
-            </div>
-            <button
-              class="w-full py-md px-lg bg-primary text-on-primary font-label-md text-label-md rounded-xl hover:bg-secondary active:scale-[0.98] transition-all flex items-center justify-center gap-sm"
-              type="submit"
-            >
-              Sign In to Portal
-              <span class="material-symbols-outlined">login</span>
-            </button>
-          </form>
-          <!-- Help Link -->
         </div>
       </section>
     </main>
-    <!-- Footer Links -->
-    <footer
-      class="bg-surface py-md px-margin-mobile md:px-margin-desktop border-t border-outline-variant/30"
-    >
-      <div
-        class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-sm"
-      >
-        <div class="flex items-center gap-xs">
-          <span
-            class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"
-          ></span>
-          <p class="font-label-sm text-label-sm text-on-surface-variant">
-            System Status: All systems operational
-          </p>
-        </div>
-        <nav class="flex gap-md">
-          <a
-            class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
-            href="#"
-            >Privacy Policy</a
-          >
-          <a
-            class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
-            href="#"
-            >IT Support</a
-          >
-          <a
-            class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
-            href="#"
-            >Contact Registrar</a
-          >
+
+    <footer class="bg-surface py-8 border-t border-outline-variant/30">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+        <p class="text-sm text-slate-500">© 2024 Limkokwing University Sierra Leone</p>
+        <nav class="flex flex-wrap gap-4 text-sm">
+          <a class="text-slate-600 hover:text-slate-900" href="#">Privacy Policy</a>
+          <a class="text-slate-600 hover:text-slate-900" href="#">IT Support</a>
+          <a class="text-slate-600 hover:text-slate-900" href="#">Contact Registrar</a>
         </nav>
-        <p class="font-label-sm text-label-sm text-outline">© 2024 Limkokwing University Sierra Leone</p>
       </div>
     </footer>
-    <script type="module" src="js/firebase-config.js"></script>
-    <script src="js/site.js"></script>
-    <script src="js/index.js"></script>
+
+    <script type="module" src="./js/firebase-config.js"></script>
+    <script src="./js/site.js"></script>
+    <script src="./js/index.js"></script>
   </body>
 </html>
+
