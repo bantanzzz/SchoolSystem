@@ -48,12 +48,6 @@
       });
     });
 
-    document.querySelectorAll("button[data-action='new-class']").forEach((button) => {
-      button.addEventListener("click", () => {
-        showToast("New class creation coming soon.");
-      });
-    });
-
     document.querySelectorAll("button[data-action='coming-soon']").forEach((button) => {
       button.addEventListener("click", () => {
         showToast("More features are coming soon.");
