@@ -139,6 +139,21 @@
 
     const { addDoc, collection, serverTimestamp } = window.firebaseUtils;
     const enrollmentForm = document.getElementById("enrollmentForm");
+    const formStatus = document.getElementById("formStatus");
+
+    const setFormStatus = (message, type = "info") => {
+      if (!formStatus) return;
+      formStatus.textContent = message;
+      formStatus.classList.remove("hidden");
+      formStatus.className = "mt-lg rounded-lg px-md py-sm text-label-md font-medium";
+      if (type === "success") {
+        formStatus.classList.add("bg-emerald-100", "text-emerald-900");
+      } else if (type === "error") {
+        formStatus.classList.add("bg-red-100", "text-red-900");
+      } else {
+        formStatus.classList.add("bg-surface-container-lowest", "text-on-surface-variant");
+      }
+    };
 
     if (!enrollmentForm) {
       return;
@@ -148,6 +163,7 @@
       event.preventDefault();
       if (!enrollmentForm.checkValidity()) {
         enrollmentForm.reportValidity();
+        setFormStatus("Please complete all required fields.", "error");
         return;
       }
 
@@ -164,20 +180,92 @@
         createdAt: serverTimestamp(),
       };
 
+      console.log("Saving enrollment to Firestore:", payload);
+      setFormStatus("Saving enrollment…", "info");
+
       try {
         await addDoc(collection(window.firebaseDb, "enrollments"), payload);
-        showToast("Student enrolled successfully.");
-        window.location.href = "./studentrecord.html";
+        console.log("Enrollment saved", payload);
+        setFormStatus("Student enrolled successfully.", "success");
+        setTimeout(() => {
+          window.location.href = "./studentrecord.html";
+        }, 800);
       } catch (error) {
-        showToast(error.message || "Enrollment save failed.");
+        console.error("Enrollment save failed:", error);
+        setFormStatus(error.message || "Enrollment save failed.", "error");
       }
     });
+  }
+
+  async function setupStudentRecords() {
+    if (currentPage !== "studentrecord.html") {
+      return;
+    }
+    if (!window.firebaseDb || !window.firebaseUtils) {
+      return;
+    }
+
+    const { collection, getDocs } = window.firebaseUtils;
+    const tableBody = document.getElementById("studentRecordsBody");
+
+    if (!tableBody) {
+      return;
+    }
+
+    tableBody.innerHTML = '<tr><td colspan="6" class="px-lg py-8 text-center text-on-surface-variant">Loading student records…</td></tr>';
+
+    try {
+      const snapshot = await getDocs(collection(window.firebaseDb, "enrollments"));
+      if (snapshot.empty) {
+        tableBody.innerHTML = '<tr><td colspan="6" class="px-lg py-8 text-center text-on-surface-variant">No student records found.</td></tr>';
+        return;
+      }
+
+      const rows = snapshot.docs
+        .map((doc) => {
+          const data = doc.data();
+          const status = data.gradeLevel ? "Active" : "Pending";
+          const classLabel = [data.gradeLevel, data.majorSection].filter(Boolean).join(" ") || "N/A";
+          return `
+            <tr class="hover:bg-surface-container-low transition-colors">
+              <td class="px-lg py-4 font-label-md text-label-md text-on-surface">${data.studentId || "-"}</td>
+              <td class="px-lg py-4">
+                <div class="flex items-center gap-sm">
+                  <div class="w-8 h-8 rounded bg-primary-fixed text-primary font-bold text-xs flex items-center justify-center">
+                    ${data.fullName ? data.fullName.charAt(0).toUpperCase() : "?"}
+                  </div>
+                  <span class="font-body-md text-body-md text-on-surface">${data.fullName || "Unknown"}</span>
+                </div>
+              </td>
+              <td class="px-lg py-4 font-body-md text-body-md text-on-surface-variant">${classLabel}</td>
+              <td class="px-lg py-4"><span class="font-label-md text-label-md text-on-surface">N/A</span></td>
+              <td class="px-lg py-4">
+                <span class="inline-block px-2 py-0.5 rounded border border-outline-variant bg-surface-container-low text-on-surface-variant text-[11px] font-bold uppercase">${status}</span>
+              </td>
+              <td class="px-lg py-4 text-right">
+                <button class="text-outline hover:text-primary p-1">
+                  <span class="material-symbols-outlined text-[20px]">edit</span>
+                </button>
+                <button class="text-outline hover:text-error p-1">
+                  <span class="material-symbols-outlined text-[20px]">delete</span>
+                </button>
+              </td>
+            </tr>`;
+        })
+        .join("");
+
+      tableBody.innerHTML = rows;
+    } catch (error) {
+      console.error("Failed to load student records:", error);
+      tableBody.innerHTML = '<tr><td colspan="6" class="px-lg py-8 text-center text-error">Unable to load student records.</td></tr>';
+    }
   }
 
   function init() {
     setupFeatureLinks();
     setupAuth();
     setupEnrollment();
+    setupStudentRecords();
 
     const reportButton = document.getElementById("generateCampusReport");
     if (reportButton) {

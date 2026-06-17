@@ -10,7 +10,8 @@ import {
 import {
   collection,
   addDoc,
-  serverTimestamp
+  serverTimestamp,
+  getDocs
 } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -36,6 +37,7 @@ window.firebaseUtils = {
   signOut,
   collection,
   addDoc,
-  serverTimestamp
+  serverTimestamp,
+  getDocs
 };
 console.log("Firebase initialized for EduManage Pro", app.name);
