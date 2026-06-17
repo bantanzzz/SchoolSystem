@@ -1,9 +1,9 @@
-﻿<!doctype html>
+<!doctype html>
 <html class="light" lang="en">
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Teacher Directory | EduManage Pro</title>
+    <title>Attendance Management | EduManage Pro</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;display=swap"
@@ -13,7 +13,7 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
       rel="stylesheet"
     />
-    <script src="./js/teacher-tailwind.config.js"></script>
+    <script src="./js/attendance-tailwind.config.js"></script>
     <style>
       body {
         font-family: "Geist", sans-serif;
@@ -57,7 +57,7 @@
           <span class="font-label-md text-label-md">Students</span>
         </a>
         <a
-          class="flex items-center gap-md px-md py-sm bg-primary-fixed text-on-primary-fixed-variant border-l-4 border-primary rounded-r-lg"
+          class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-low transition-colors"
           href="./teacher.html"
         >
           <span class="material-symbols-outlined">person</span>
@@ -71,7 +71,7 @@
           <span class="font-label-md text-label-md">Classes</span>
         </a>
         <a
-          class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-low transition-colors"
+          class="flex items-center gap-md px-md py-sm bg-primary-fixed text-on-primary-fixed-variant border-l-4 border-primary rounded-r-lg"
           href="./attendance.html"
         >
           <span class="material-symbols-outlined">calendar_today</span>
@@ -109,7 +109,7 @@
       >
         <div class="flex items-center gap-md flex-1">
           <h2 class="font-headline-md text-headline-md text-on-surface">
-            Teacher Directory
+            Attendance Management
           </h2>
         </div>
         <div class="flex items-center gap-lg">
@@ -147,32 +147,29 @@
             >
             <input
               class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-lg focus:ring-1 focus:ring-primary font-body-md text-body-md"
-              placeholder="Search teachers (e.g., Mr. Kamara)..."
+              placeholder="Search attendance records..."
               type="text"
             />
           </div>
           <select
             class="px-4 py-2 bg-surface-container-low border border-outline-variant rounded-lg font-label-md text-label-md focus:ring-1 focus:ring-primary"
           >
-            <option>Filter by Department</option>
-            <option>Mathematics</option>
-            <option>Science</option>
-            <option>Humanities</option>
-            <option>Computer Science</option>
+            <option>Filter by Class</option>
           </select>
           <select
             class="px-4 py-2 bg-surface-container-low border border-outline-variant rounded-lg font-label-md text-label-md focus:ring-1 focus:ring-primary"
           >
             <option>Filter by Status</option>
-            <option>Active</option>
-            <option>On Leave</option>
+            <option>Present</option>
+            <option>Absent</option>
+            <option>Late</option>
           </select>
           <div class="flex gap-2 ml-auto">
             <button
               class="px-4 py-2 bg-primary text-on-primary rounded-lg hover:opacity-90 transition-all font-label-md text-label-md"
-              data-action="new-teacher"
+              data-action="new-attendance"
             >
-              New Teacher
+              Mark Attendance
             </button>
             <button
               class="px-4 py-2 bg-surface-container-lowest border border-outline-variant text-on-surface rounded-lg hover:bg-surface-container-high transition-all font-label-md text-label-md"
@@ -194,23 +191,26 @@
                   ID
                 </th>
                 <th class="px-lg py-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
-                  Teacher Name
+                  Class
                 </th>
                 <th class="px-lg py-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
-                  Department
+                  Date
                 </th>
                 <th class="px-lg py-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
-                  Email
+                  Total Students
                 </th>
                 <th class="px-lg py-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
-                  Status
+                  Present
+                </th>
+                <th class="px-lg py-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
+                  Absent
                 </th>
                 <th class="px-lg py-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody id="teachersTableBody">
+            <tbody id="attendanceTableBody">
               <!-- Dynamically populated -->
             </tbody>
           </table>
@@ -218,11 +218,11 @@
       </main>
     </div>
 
-    <!-- Add/Edit Teacher Modal -->
-    <div id="teacherModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <!-- Mark/Edit Attendance Modal -->
+    <div id="attendanceModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div class="bg-surface-container-lowest rounded-lg p-lg max-w-md w-full mx-4">
         <div class="flex justify-between items-center mb-lg">
-          <h3 class="font-headline-sm text-headline-sm text-on-surface" id="modalTitle">Add New Teacher</h3>
+          <h3 class="font-headline-sm text-headline-sm text-on-surface" id="attendanceModalTitle">Mark Attendance</h3>
           <button
             type="button"
             class="text-on-surface-variant hover:text-on-surface transition-colors"
@@ -232,15 +232,15 @@
           </button>
         </div>
 
-        <form id="teacherForm" class="space-y-md">
+        <form id="attendanceForm" class="space-y-md">
           <div>
             <label class="block font-label-md text-label-md text-on-surface mb-2">
-              Teacher Name <span class="text-error">*</span>
+              Class <span class="text-error">*</span>
             </label>
             <input
               type="text"
-              id="teacherName"
-              placeholder="e.g., Mr. Ibrahim Kamara"
+              id="attendanceClass"
+              placeholder="e.g., Grade 10-A"
               class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg focus:ring-1 focus:ring-primary font-body-md text-body-md"
               required
             />
@@ -248,12 +248,11 @@
 
           <div>
             <label class="block font-label-md text-label-md text-on-surface mb-2">
-              Email <span class="text-error">*</span>
+              Date <span class="text-error">*</span>
             </label>
             <input
-              type="email"
-              id="teacherEmail"
-              placeholder="e.g., ikamara@limkokwing.sl"
+              type="date"
+              id="attendanceDate"
               class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg focus:ring-1 focus:ring-primary font-body-md text-body-md"
               required
             />
@@ -261,54 +260,65 @@
 
           <div>
             <label class="block font-label-md text-label-md text-on-surface mb-2">
-              Department <span class="text-error">*</span>
-            </label>
-            <select
-              id="teacherDepartment"
-              class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg focus:ring-1 focus:ring-primary font-body-md text-body-md"
-              required
-            >
-              <option value="">Select Department</option>
-              <option value="Mathematics">Mathematics</option>
-              <option value="Science">Science</option>
-              <option value="Humanities">Humanities</option>
-              <option value="Computer Science">Computer Science</option>
-            </select>
-          </div>
-
-          <div>
-            <label class="block font-label-md text-label-md text-on-surface mb-2">
-              Phone Number
+              Total Students <span class="text-error">*</span>
             </label>
             <input
-              type="tel"
-              id="teacherPhone"
-              placeholder="e.g., +232 76 123 456"
+              type="number"
+              id="attendanceTotalStudents"
+              min="1"
+              placeholder="e.g., 30"
               class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg focus:ring-1 focus:ring-primary font-body-md text-body-md"
+              required
             />
           </div>
 
           <div>
             <label class="block font-label-md text-label-md text-on-surface mb-2">
-              Status <span class="text-error">*</span>
+              Present <span class="text-error">*</span>
             </label>
-            <select
-              id="teacherStatus"
+            <input
+              type="number"
+              id="attendancePresent"
+              min="0"
+              placeholder="e.g., 28"
               class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg focus:ring-1 focus:ring-primary font-body-md text-body-md"
               required
-            >
-              <option value="Active">Active</option>
-              <option value="On Leave">On Leave</option>
-            </select>
+            />
+          </div>
+
+          <div>
+            <label class="block font-label-md text-label-md text-on-surface mb-2">
+              Absent <span class="text-error">*</span>
+            </label>
+            <input
+              type="number"
+              id="attendanceAbsent"
+              min="0"
+              placeholder="e.g., 2"
+              class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg focus:ring-1 focus:ring-primary font-body-md text-body-md"
+              required
+            />
+          </div>
+
+          <div>
+            <label class="block font-label-md text-label-md text-on-surface mb-2">
+              Notes
+            </label>
+            <textarea
+              id="attendanceNotes"
+              placeholder="Add any notes about this attendance..."
+              class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg focus:ring-1 focus:ring-primary font-body-md text-body-md"
+              rows="3"
+            ></textarea>
           </div>
 
           <div class="flex gap-md pt-lg">
             <button
               type="submit"
               class="flex-1 px-4 py-2 bg-primary text-on-primary rounded-lg hover:opacity-90 transition-all font-label-md text-label-md"
-              id="submitBtn"
+              id="attendanceSubmitBtn"
             >
-              Add Teacher
+              Mark Attendance
             </button>
             <button
               type="button"
@@ -321,9 +331,9 @@
         </form>
       </div>
     </div>
+
     <script type="module" src="./js/firebase-config.js"></script>
     <script src="./js/site.js"></script>
-    <script src="./js/teacher.js"></script>
+    <script type="module" src="./js/attendance.js"></script>
   </body>
 </html>
-

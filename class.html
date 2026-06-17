@@ -72,7 +72,7 @@
         </a>
         <a
           class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-low transition-colors"
-          href="#"
+          href="./attendance.html"
         >
           <span class="material-symbols-outlined">calendar_today</span>
           <span class="font-label-md text-label-md">Attendance</span>
@@ -209,47 +209,128 @@
                 </th>
               </tr>
             </thead>
-            <tbody>
-              <tr class="border-b border-outline-variant hover:bg-surface-container-high transition-colors">
-                <td class="px-lg py-4 font-label-md text-on-surface">CLS-101</td>
-                <td class="px-lg py-4 font-label-md text-on-surface">Grade 10-A</td>
-                <td class="px-lg py-4 font-label-md text-on-surface">Mr. Ibrahim Kamara</td>
-                <td class="px-lg py-4 font-label-md text-on-surface">Mon/Wed/Fri 09:00 - 10:30</td>
-                <td class="px-lg py-4 font-label-md text-success">Open</td>
-                <td class="px-lg py-4">
-                  <button class="px-3 py-1 bg-primary text-on-primary rounded-lg text-xs font-bold hover:bg-secondary transition-colors">
-                    View
-                  </button>
-                </td>
-              </tr>
-              <tr class="border-b border-outline-variant hover:bg-surface-container-high transition-colors">
-                <td class="px-lg py-4 font-label-md text-on-surface">CLS-112</td>
-                <td class="px-lg py-4 font-label-md text-on-surface">Grade 11-B</td>
-                <td class="px-lg py-4 font-label-md text-on-surface">Mrs. Mariatu Conteh</td>
-                <td class="px-lg py-4 font-label-md text-on-surface">Tue/Thu 11:00 - 12:30</td>
-                <td class="px-lg py-4 font-label-md text-on-surface">Open</td>
-                <td class="px-lg py-4">
-                  <button class="px-3 py-1 bg-primary text-on-primary rounded-lg text-xs font-bold hover:bg-secondary transition-colors">
-                    View
-                  </button>
-                </td>
-              </tr>
-              <tr class="border-b border-outline-variant hover:bg-surface-container-high transition-colors">
-                <td class="px-lg py-4 font-label-md text-on-surface">CLS-123</td>
-                <td class="px-lg py-4 font-label-md text-on-surface">Grade 12-C</td>
-                <td class="px-lg py-4 font-label-md text-on-surface">Dr. Musa Bah</td>
-                <td class="px-lg py-4 font-label-md text-on-surface">Mon-Fri 14:00 - 15:00</td>
-                <td class="px-lg py-4 font-label-md text-on-surface">Closed</td>
-                <td class="px-lg py-4">
-                  <button class="px-3 py-1 bg-primary text-on-primary rounded-lg text-xs font-bold hover:bg-secondary transition-colors">
-                    View
-                  </button>
-                </td>
-              </tr>
+            <tbody id="classesTableBody">
+              <!-- Dynamically populated -->
             </tbody>
           </table>
         </div>
       </main>
+    </div>
+
+    <!-- Add/Edit Class Modal -->
+    <div id="classModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div class="bg-surface-container-lowest rounded-lg p-lg max-w-md w-full mx-4 max-h-[90vh] overflow-y-auto">
+        <div class="flex justify-between items-center mb-lg">
+          <h3 class="font-headline-sm text-headline-sm text-on-surface" id="classModalTitle">Add New Class</h3>
+          <button
+            type="button"
+            class="text-on-surface-variant hover:text-on-surface transition-colors"
+            data-action="close-modal"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+
+        <form id="classForm" class="space-y-md">
+          <div>
+            <label class="block font-label-md text-label-md text-on-surface mb-2">
+              Class Name <span class="text-error">*</span>
+            </label>
+            <input
+              type="text"
+              id="className"
+              placeholder="e.g., Grade 10-A"
+              class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg focus:ring-1 focus:ring-primary font-body-md text-body-md"
+              required
+            />
+          </div>
+
+          <div>
+            <label class="block font-label-md text-label-md text-on-surface mb-2">
+              Grade Level <span class="text-error">*</span>
+            </label>
+            <select
+              id="classGrade"
+              class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg focus:ring-1 focus:ring-primary font-body-md text-body-md"
+              required
+            >
+              <option value="">Select Grade</option>
+              <option value="Grade 10">Grade 10</option>
+              <option value="Grade 11">Grade 11</option>
+              <option value="Grade 12">Grade 12</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block font-label-md text-label-md text-on-surface mb-2">
+              Teacher <span class="text-error">*</span>
+            </label>
+            <input
+              type="text"
+              id="classTeacher"
+              placeholder="e.g., Mr. Ibrahim Kamara"
+              class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg focus:ring-1 focus:ring-primary font-body-md text-body-md"
+              required
+            />
+          </div>
+
+          <div>
+            <label class="block font-label-md text-label-md text-on-surface mb-2">
+              Schedule <span class="text-error">*</span>
+            </label>
+            <input
+              type="text"
+              id="classSchedule"
+              placeholder="e.g., Mon/Wed/Fri 09:00 - 10:30"
+              class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg focus:ring-1 focus:ring-primary font-body-md text-body-md"
+              required
+            />
+          </div>
+
+          <div>
+            <label class="block font-label-md text-label-md text-on-surface mb-2">
+              Room Number
+            </label>
+            <input
+              type="text"
+              id="classRoom"
+              placeholder="e.g., 101"
+              class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg focus:ring-1 focus:ring-primary font-body-md text-body-md"
+            />
+          </div>
+
+          <div>
+            <label class="block font-label-md text-label-md text-on-surface mb-2">
+              Status <span class="text-error">*</span>
+            </label>
+            <select
+              id="classStatus"
+              class="w-full px-3 py-2 bg-surface-container-low border border-outline-variant rounded-lg focus:ring-1 focus:ring-primary font-body-md text-body-md"
+              required
+            >
+              <option value="Open">Open</option>
+              <option value="Closed">Closed</option>
+            </select>
+          </div>
+
+          <div class="flex gap-md pt-lg">
+            <button
+              type="submit"
+              class="flex-1 px-4 py-2 bg-primary text-on-primary rounded-lg hover:opacity-90 transition-all font-label-md text-label-md"
+              id="classSubmitBtn"
+            >
+              Add Class
+            </button>
+            <button
+              type="button"
+              class="flex-1 px-4 py-2 bg-surface-container-low border border-outline-variant text-on-surface rounded-lg hover:bg-surface-container-high transition-all font-label-md text-label-md"
+              data-action="close-modal"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
     <script type="module" src="./js/firebase-config.js"></script>
     <script src="./js/site.js"></script>

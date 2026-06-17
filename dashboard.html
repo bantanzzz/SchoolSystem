@@ -86,7 +86,7 @@
         </a>
         <a
           class="flex items-center gap-3 px-4 py-2.5 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors"
-          href="#"
+          href="./attendance.html"
         >
           <span class="material-symbols-outlined text-xl">calendar_today</span>
           <span class="text-sm">Attendance</span>
@@ -196,7 +196,7 @@
         </div>
         <!-- Metric Cards -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="dashboard-card p-6 rounded-xl">
+          <div class="dashboard-card p-6 rounded-xl" id="studentsCard">
             <div class="flex justify-between items-start mb-4">
               <div class="p-2.5 bg-primary/10 rounded-lg">
                 <span class="material-symbols-outlined text-primary"
@@ -213,15 +213,15 @@
             >
               Total Students
             </p>
-            <p class="text-3xl font-bold mt-1 text-on-surface">1,284</p>
+            <p class="text-3xl font-bold mt-1 text-on-surface">0</p>
             <a
-              class="mt-5 w-full py-2.5 bg-primary text-on-primary text-xs font-bold rounded-lg hover:opacity-95 transition-opacity text-center"
+              class="mt-5 w-full py-2.5 bg-primary text-on-primary text-xs font-bold rounded-lg hover:opacity-95 transition-opacity text-center cursor-pointer"
               href="./studentEnrollment.html"
             >
               Enroll New Student
             </a>
           </div>
-          <div class="dashboard-card p-6 rounded-xl">
+          <div class="dashboard-card p-6 rounded-xl" id="teachersCard">
             <div class="flex justify-between items-start mb-4">
               <div class="p-2.5 bg-surface-container-low rounded-lg">
                 <span class="material-symbols-outlined text-on-surface-variant"
@@ -238,7 +238,7 @@
             >
               Total Faculty
             </p>
-            <p class="text-3xl font-bold mt-1 text-on-surface">96</p>
+            <p class="text-3xl font-bold mt-1 text-on-surface">0</p>
             <p
               class="text-xs text-on-surface-variant/70 mt-5 flex items-center gap-1"
             >
@@ -246,7 +246,7 @@
               8 new faculty joined this semester.
             </p>
           </div>
-          <div class="dashboard-card p-6 rounded-xl">
+          <div class="dashboard-card p-6 rounded-xl" id="classesCard">
             <div class="flex justify-between items-start mb-4">
               <div class="p-2.5 bg-surface-container-low rounded-lg">
                 <span class="material-symbols-outlined text-on-surface-variant"
@@ -263,12 +263,12 @@
             >
               Total Classes
             </p>
-            <p class="text-3xl font-bold mt-1 text-on-surface">420</p>
+            <p class="text-3xl font-bold mt-1 text-on-surface">0</p>
             <p class="text-xs text-on-surface-variant/70 mt-5">
               Across 12 specialized departments.
             </p>
           </div>
-          <div class="dashboard-card p-6 rounded-xl border-error/20">
+          <div class="dashboard-card p-6 rounded-xl border-error/20" id="attendanceCard">
             <div class="flex justify-between items-start mb-4">
               <div class="p-2.5 bg-error/10 rounded-lg">
                 <span class="material-symbols-outlined text-error"
@@ -406,9 +406,10 @@
               >
                 Admin Quick Actions
               </h3>
-              <div class="grid grid-cols-2 gap-3">
+              <div class="grid grid-cols-2 gap-3" id="quickActionsContainer">
                 <button
-                  class="flex flex-col items-center p-4 border border-outline-variant hover:bg-surface-container-low rounded-xl transition-all hover:border-primary/30"
+                  class="flex flex-col items-center p-4 border border-outline-variant hover:bg-surface-container-low rounded-xl transition-all hover:border-primary/30 cursor-pointer"
+                  data-action="add-faculty"
                 >
                   <span
                     class="material-symbols-outlined text-primary mb-2 text-2xl"
@@ -417,7 +418,8 @@
                   <span class="text-[11px] font-bold">Faculty</span>
                 </button>
                 <button
-                  class="flex flex-col items-center p-4 border border-outline-variant hover:bg-surface-container-low rounded-xl transition-all hover:border-primary/30"
+                  class="flex flex-col items-center p-4 border border-outline-variant hover:bg-surface-container-low rounded-xl transition-all hover:border-primary/30 cursor-pointer"
+                  data-action="add-course"
                 >
                   <span
                     class="material-symbols-outlined text-primary mb-2 text-2xl"
@@ -426,7 +428,8 @@
                   <span class="text-[11px] font-bold">Course</span>
                 </button>
                 <button
-                  class="flex flex-col items-center p-4 border border-outline-variant hover:bg-surface-container-low rounded-xl transition-all hover:border-primary/30"
+                  class="flex flex-col items-center p-4 border border-outline-variant hover:bg-surface-container-low rounded-xl transition-all hover:border-primary/30 cursor-pointer"
+                  data-action="mass-email"
                 >
                   <span
                     class="material-symbols-outlined text-primary mb-2 text-2xl"
@@ -435,7 +438,8 @@
                   <span class="text-[11px] font-bold">Mass Email</span>
                 </button>
                 <button
-                  class="flex flex-col items-center p-4 border border-outline-variant hover:bg-surface-container-low rounded-xl transition-all hover:border-primary/30"
+                  class="flex flex-col items-center p-4 border border-outline-variant hover:bg-surface-container-low rounded-xl transition-all hover:border-primary/30 cursor-pointer"
+                  data-action="campus-event"
                 >
                   <span
                     class="material-symbols-outlined text-primary mb-2 text-2xl"
@@ -448,7 +452,7 @@
             <div class="dashboard-card p-6 rounded-xl">
               <div class="flex justify-between items-center mb-5">
                 <h3
-                  class="text-xs font-bold text-on-surface-variant uppercase tracking-widest"
+                  class="text-xs font-bold text-on-surface-variant uppercase  cursor-pointer" id="viewAllActivityBtntracking-widest"
                 >
                   Campus Activity
                 </h3>
