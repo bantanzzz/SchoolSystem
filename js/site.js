@@ -120,9 +120,8 @@
           return;
         }
 
-        const userId = document.getElementById("student-id")?.value || "";
+        const email = document.getElementById("email")?.value || "";
         const password = document.getElementById("password")?.value || "";
-        const email = buildFirebaseEmail(userId);
 
         try {
           await signInWithEmailAndPassword(window.firebaseAuth, email, password);
